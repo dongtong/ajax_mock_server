@@ -1,0 +1,84 @@
+
+<h3>查看请求状态</h3>
+
+<div class="row">
+    <div class="col s6">
+      <ul class="tabs z-depth-1">
+      	<% @actived_num = @namespace.state_codes.where('actived=?', true).length%>
+      	<% @namespace.state_codes.each_with_index do |item, index|%>
+					<%if index == 0%>
+						<li class="tab col s2"><a id="<%= item.id%>" class="<%= @actived_num == 0 ? 'active' : (item.actived ? 'active'  : '')%>" href="#<%= item.code_num%>"><%= item.code_des%></a></li>
+					<%else%>
+						<li class="tab col s2"><a id="<%= item.id%>" class="<%= @actived_num == 0 ? '' : (item.actived ? 'active'  : '')%>" href="#<%= item.code_num%>"><%= item.code_des%></a></li>
+					<%end%>
+				<%end%>
+      </ul>
+    </div>
+</div>
+
+<% @namespace.state_codes.each_with_index do |item, index|%>
+	<%if index == 0%>
+			<div id="<%= item.code_num%>" class="col s12" style="<%= @actived_num == 0 ? 'display: block' : (item.actived ? 'display: block'  : 'display: none')%>">
+		    	<%= form_for(item, :url => update_code_res_json_namespace_state_code_path(@namespace, item), html: {id: "sc#{item.id}", class: 'code_res_form'}) do |f| %>
+					  <div class="row">
+						  <div class="input-field col s12">
+					    <%= f.label '返回JSON' %><br>
+					    <%= f.text_area :code_res_json, class: 'materialize-textarea'%>
+					    </div>
+					  </div>
+					<% end %>
+		  </div>
+	<%else%>
+			<div id="<%= item.code_num%>" class="col s12" style="<%= @actived_num == 0 ? 'display: none' : (item.actived ? 'display: block'  : 'display: none')%>">
+		    	<%= form_for(item, :url => update_code_res_json_namespace_state_code_path(@namespace, item), html: {id: "sc#{item.id}", class: 'code_res_form'}) do |f| %>
+		    		<div class="row">
+						  <div class="input-field col s12">
+						    <%= f.label '返回JSON' %><br>
+						    <%= f.text_area :code_res_json, class: 'materialize-textarea', rows: 30 %>
+						  </div>
+					  </div>
+					<% end %>
+		  </div>
+	<%end%>
+	
+<%end%>
+<%= hidden_field_tag 'ns_id', @namespace.id%>
+
+
+<div class="row">
+	<div class="col s12 center">
+		<a class="waves-effect waves-light btn" id="select_code_num">选择当前状态</a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12">
+		<a class="waves-effect waves-light btn" href="/namespaces">返回</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+		$(function(){
+			$('ul.tabs').tabs();
+
+			$('#select_code_num').on('click', function(){
+				var state_code_id = $('.tabs li a.active').attr('id');
+				$.ajax({
+					type: 'POST',
+					url: '/namespaces/'+$('#ns_id').val()+'/state_codes/'+state_code_id+'/update_code_res_json',
+					data: $('#sc' + state_code_id).serialize(),
+					dataType: 'json',
+          success: function(data, status, xhr){
+            if(data.success) {
+            	Materialize.toast('设定成功', 5000);
+            }else{
+            	Materialize.toast('设定失败', 5000);
+            }
+          },
+          error: function(xhr, status, errorThrown){      
+            Materialize.toast('系统异常', 5000);
+          }
+				})
+			});
+		});
+</script>

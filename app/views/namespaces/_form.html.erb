@@ -1,0 +1,28 @@
+<%= form_for(@namespace) do |f| %>
+  <% if @namespace.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@namespace.errors.count, "error") %> prohibited this namespace from being saved:</h2>
+
+      <ul>
+      <% @namespace.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :ns %><br>
+    <%= f.text_field :ns %>
+  </div>
+  <div class="field">
+    <%= f.label :url_key %><br>
+    <%= f.text_field :url_key %>
+  </div>
+  <div class="field">
+    <%= f.label :url_address %><br>
+    <%= f.text_field :url_address %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,46 @@
+<h2>Mock列表</h2>
+<%= link_to new_namespace_path,  class: "waves-effect waves-light btn" do%>
+  <i class="material-icons">add</i><span class="link-txt">添加Mock</span> 
+<%end%>
+<br>
+<table class="bordered">
+  <thead>
+    <tr>
+      <th>命名空间</th>
+      <th>Action</th>
+      <th>请求地址</th>
+      <th>状态数量</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @namespaces.each do |namespace| %>
+      <tr>
+        <td><%= namespace.ns %></td>
+        <td><%= namespace.url_key %></td>
+        <td><%= namespace.url_address %></td>
+        <td><%= namespace.state_codes.count %></td>
+        <td>
+          <%= link_to add_state_codes_namespace_path(namespace), class: "waves-effect waves-light btn" do%>
+            <i class="material-icons">add</i><span class="link-txt">状态码</span> 
+          <%end%>
+          <%= link_to namespace, class: "waves-effect waves-light btn" do%>
+            <i class="material-icons">visibility</i><span class="link-txt">查看</span> 
+          <%end%>
+          <%= link_to edit_namespace_path(namespace), class: "waves-effect waves-light btn" do%>
+            <i class="material-icons">mode_edit</i><span class="link-txt">编辑</span> 
+          <%end%>
+          <%= link_to namespace, method: :delete, data: { confirm: 'Are you sure?' }, class: "waves-effect waves-light btn" do %>
+            <i class="material-icons">delete</i><span class="link-txt">删除</span> 
+          <%end%>
+        </td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
