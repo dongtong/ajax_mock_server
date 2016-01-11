@@ -29,11 +29,9 @@ class NamespacesController < ApplicationController
 
     respond_to do |format|
       if @namespace.save
-        format.html { redirect_to @namespace, notice: 'Namespace was successfully created.' }
-        format.json { render :show, status: :created, location: @namespace }
+        format.html { redirect_to namespaces_url, notice: '命名空间创建成功' }
       else
         format.html { render :new }
-        format.json { render json: @namespace.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,11 +41,9 @@ class NamespacesController < ApplicationController
   def update
     respond_to do |format|
       if @namespace.update(namespace_params)
-        format.html { redirect_to @namespace, notice: 'Namespace was successfully updated.' }
-        format.json { render :show, status: :ok, location: @namespace }
+        format.html { redirect_to namespaces_url, notice: '命名空间更新成功' }
       else
         format.html { render :edit }
-        format.json { render json: @namespace.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +53,7 @@ class NamespacesController < ApplicationController
   def destroy
     @namespace.destroy
     respond_to do |format|
-      format.html { redirect_to namespaces_url, notice: 'Namespace was successfully destroyed.' }
+      format.html { redirect_to namespaces_url, notice: '命名空间删除成功' }
       format.json { head :no_content }
     end
   end
@@ -74,7 +70,11 @@ class NamespacesController < ApplicationController
     if state_code.save
       redirect_to namespaces_url, notice: '状态码创建成功'
     else
-      render :add_state_codes
+      puts "---------------#{state_code.errors.messages.values.join(',')}"
+      @namespace = Namespace.find(params[:id])
+      @state_code = @namespace.state_codes.new
+      @errors = state_code.errors.messages.values.join(',')
+      render :add_state_codes, errors: @errors
     end
   end
 

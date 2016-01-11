@@ -1,0 +1,19 @@
+zh:
+  activerecord:
+    errors:
+      models:
+        namespace:
+          attributes:
+            ns:
+              blank: 命名空间不能为空
+            url_key:
+              blank: Action不能为空
+            url_address:
+              blank: 请求地址不能为空
+              taken: 请求地址已经存在
+        state_code:
+        	attributes:
+        		code_num: 
+        		  blank: 状态编码不能为空
+        		code_desc: 
+        		  blank: 状态描述不能为空

@@ -10,19 +10,19 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :ns %><br>
+  <div class="input-field">
+    <%= f.label '命名空间' %><br>
     <%= f.text_field :ns %>
   </div>
-  <div class="field">
-    <%= f.label :url_key %><br>
+  <div class="input-field">
+    <%= f.label 'Action' %><br>
     <%= f.text_field :url_key %>
   </div>
-  <div class="field">
-    <%= f.label :url_address %><br>
+  <div class="input-field">
+    <%= f.label '请求地址' %><br>
     <%= f.text_field :url_address %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions center">
+    <%= f.submit '添加', class: 'waves-effect waves-light btn' %>
   </div>
 <% end %>
