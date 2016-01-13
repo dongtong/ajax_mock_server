@@ -7,26 +7,52 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul>
-<nav>
+
+<nav class="teal">
   <div class="nav-wrapper">
-    <a href="/namespaces" class="brand-logo center">Mock Server</a>
+    <ul class="right hide-on-med-and-down">                                              
+      <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light"><i class="mdi-social-notifications"></i></a></li>                        
+      <li><a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"><i class="mdi-communication-chat"></i></a></li>
+    </ul>
   </div>
+  
 </nav>
 
-<div class="container">
-	<div class="row">
-		<div class="col l12 offset-l2 m12 s12">
-			<%= yield %>
-		</div>
-	</div>
-</div>
+<!-- Page Layout here -->
+    <div class="row">
+
+      <div class="col s12 m3 l2" id="left_bar"> <!-- Note that "m4 l3" was added -->
+        <div class="nav-wrapper">
+          <ul id="left_nav" class="side-nav">
+          <li class="bold"><a href="index.html" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> 首页</a>
+            </li>
+          <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-action-list"></i> Mock管理</a></li>
+          <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-action-list"></i> JS构建管理</a></li>
+        </ul>
+        </div>
+        
+      </div>
+
+      <div class="col s12 m9 l10" id="content"> <!-- Note that "m8 l9" was added -->
+        <%= yield :breadcrumb%>
+
+        <div class="container">
+          <div class="section">
+            <div class="row">
+              <div class="col l12 offset-l2 m12 s12">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+
+
+
+
 
 
 </body>

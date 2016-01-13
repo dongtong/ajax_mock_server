@@ -66,6 +66,17 @@
 <script type="text/javascript">
 		$(function(){
 			$('ul.tabs').tabs();
+			setTimeout(function() {
+					autosize($('textarea'));
+			}, 100);
+
+			$('ul.tabs').on('click', function() {
+				setTimeout(function() {
+					autosize($('textarea'));
+				}, 100);
+			})
+			
+
 			$('#select_code_num').on('click', function(){
 				var state_code_id = $('.tabs li a.active').attr('id');
 				$.ajax({

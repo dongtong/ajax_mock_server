@@ -2091,7 +2091,7 @@ img.responsive-img, video.responsive-video {
       overflow: hidden;
       white-space: nowrap; } }
 
-.breadcrumb {
+/*.breadcrumb {
   font-size: 18px;
   color: rgba(255, 255, 255, 0.7); }
   .breadcrumb:before {
@@ -2108,7 +2108,7 @@ img.responsive-img, video.responsive-video {
   .breadcrumb:first-child:before {
     display: none; }
   .breadcrumb:last-child {
-    color: #fff; }
+    color: #fff; }*/
 
 .parallax-container {
   position: relative;

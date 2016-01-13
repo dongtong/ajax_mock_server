@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  
+  root 'namespaces#index'
 
   resources :namespaces do
     member do
