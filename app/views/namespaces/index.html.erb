@@ -9,30 +9,47 @@
 
 
 
-<div class="row">
-  <% @namespaces.each do |namespace| %>
-    <div class="col s12 m6 l3 ">
-      <div class="section z-depth-4">
-        <div>命名空间: <%= namespace.ns %> | <%= namespace.url_key %></div>
-        <div>请求地址: <%= namespace.url_address %></div>
-        <div>状态数量: <%= namespace.state_codes.count %></div>
-        <div>
-          <%= link_to add_state_codes_namespace_path(namespace), class: "waves-effect waves-light btn" do%>
-            <i class="material-icons">add</i><span class="link-txt">状态码</span> 
-          <%end%>
-          <%= link_to namespace, class: "waves-effect waves-light btn" do%>
-            <i class="material-icons">visibility</i><span class="link-txt">查看</span> 
-          <%end%>
-          <%= link_to edit_namespace_path(namespace), class: "waves-effect waves-light btn" do%>
-            <i class="material-icons">mode_edit</i><span class="link-txt">编辑</span> 
-          <%end%>
-          <%= link_to namespace, method: :delete, data: { confirm: 'Are you sure?' }, class: "waves-effect waves-light btn" do %>
-            <i class="material-icons">delete</i><span class="link-txt">删除</span> 
-          <%end%>
+<div class="row center">
+    <% @namespaces.each do |namespace| %>
+      <div class="col s12 m6 l3 ">
+        <div class="section z-depth-4 card">
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><%= namespace.ns %> | <%= namespace.url_key %><i class="material-icons right">more_vert</i></span>
+
+            <ul class="ns-item">
+              <li>
+                <span class="left">请求地址:</span>
+                <span class="title"><%= namespace.url_address %></span>
+              </li>
+              <li>
+                <span class="left">状态数量:</span>
+                <span class="title chip blue white-text"><%= namespace.state_codes.count %></span>
+              </li>
+            </ul>
+
+          </div>
+          <div class="card-action">
+            <%= link_to add_state_codes_namespace_path(namespace), class: "waves-effect waves-light btn" do%>
+              <span class="link-txt white-text">添加状态码</span> 
+            <%end%>
+            <%= link_to namespace, class: "waves-effect waves-light btn" do%>
+              <span class="link-txt white-text">查看</span> 
+            <%end%>
+            <%= link_to edit_namespace_path(namespace), class: "waves-effect waves-light btn" do%>
+              <span class="link-txt white-text">编辑</span> 
+            <%end%>
+            <%= link_to namespace, method: :delete, data: { confirm: 'Are you sure?' }, class: "waves-effect waves-light btn" do %>
+              <span class="link-txt white-text">删除</span> 
+            <%end%>
+          </div>
+
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+          </div>
         </div>
       </div>
-    </div>
-  <%end%>
+    <%end%>
 </div>
 
 
