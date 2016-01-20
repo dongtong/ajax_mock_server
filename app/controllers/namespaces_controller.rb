@@ -70,7 +70,6 @@ class NamespacesController < ApplicationController
     if state_code.save
       redirect_to namespaces_url, notice: '状态码创建成功'
     else
-      puts "---------------#{state_code.errors.messages.values.join(',')}"
       @namespace = Namespace.find(params[:id])
       @state_code = @namespace.state_codes.new
       @errors = state_code.errors.messages.values.join(',')
@@ -86,7 +85,7 @@ class NamespacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def namespace_params
-      params.require(:namespace).permit(:ns, :url_key, :url_address, :status, :res)
+      params.require(:namespace).permit(:ns, :url_key, :url_address, :status, :res, :description)
     end
 
     def state_code_params

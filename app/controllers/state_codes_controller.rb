@@ -18,6 +18,15 @@ class StateCodesController < ApplicationController
 		end
   end
 
+  def destroy
+  	state_code = StateCode.find(params[:id])
+  	if state_code.destroy
+  		render json: {success: true}
+  	else
+  		render json: {success: false}
+  	end
+  end
+
   private
 
   def state_code_params

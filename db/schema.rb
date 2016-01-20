@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223080829) do
+ActiveRecord::Schema.define(version: 20160120012750) do
 
   create_table "namespaces", force: true do |t|
     t.string   "url_key"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151223080829) do
     t.datetime "updated_at"
     t.string   "ns"
     t.text     "res"
+    t.text     "description"
   end
 
   create_table "state_codes", force: true do |t|

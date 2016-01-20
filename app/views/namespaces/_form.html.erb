@@ -22,7 +22,16 @@
     <%= f.label '请求地址' %><br>
     <%= f.text_field :url_address %>
   </div>
-  <div class="actions center">
-    <%= f.submit '添加', class: 'waves-effect waves-light btn' %>
+
+  <div class="input-field">
+    <%= f.label '描述' %><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= link_to namespaces_path,  class: "waves-effect waves-light btn left" do%>
+      <span class="link-txt">返回列表</span> 
+    <%end%>
+    <%= f.submit btn_txt, class: 'waves-effect waves-light btn right' %>
   </div>
 <% end %>

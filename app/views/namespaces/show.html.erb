@@ -1,64 +1,80 @@
-
-
-
-
 <div class="row">
-	<div class="col s12">
-		<a class="waves-effect waves-light btn mtop" href="/namespaces">返回</a>
-		<h4 class="center">查看请求状态</h4>
-	</div>
-</div>
+  <div class="col s12 m10 push-m1 l10 push-l1">
+  	<h4 class="center">查看请求状态</h4>
+		<!--content-->
 
-<div class="row">
-    <div class="col s6">
-      <ul class="tabs z-depth-1">
-      	<% @actived_num = @namespace.state_codes.where('actived=?', true).length%>
-      	<% @namespace.state_codes.each_with_index do |item, index|%>
-					<%if index == 0%>
-						<li class="tab col s2"><a id="<%= item.id%>" class="<%= @actived_num == 0 ? 'active' : (item.actived ? 'active'  : '')%>" href="#<%= item.code_num%>"><%= item.code_des%></a></li>
-					<%else%>
-						<li class="tab col s2"><a id="<%= item.id%>" class="<%= @actived_num == 0 ? '' : (item.actived ? 'active'  : '')%>" href="#<%= item.code_num%>"><%= item.code_des%></a></li>
-					<%end%>
-				<%end%>
-      </ul>
-    </div>
-</div>
+		      <ul class="tabs z-depth-1">
+		      	<% @actived_num = @namespace.state_codes.where('actived=?', true).length%>
+		      	<% @namespace.state_codes.each_with_index do |item, index|%>
+							<%if index == 0%>
+								<li class="tab col s2">
+								  <a id="<%= item.id%>" class="<%= @actived_num == 0 ? 'active' : (item.actived ? 'active'  : '')%>" href="#<%= item.code_num%>"><%= item.code_des%></a>
+								</li>
+							<%else%>
+								<li class="tab col s2"><a id="<%= item.id%>" class="<%= @actived_num == 0 ? '' : (item.actived ? 'active'  : '')%>" href="#<%= item.code_num%>"><%= item.code_des%></a>
+							<%end%>
+						<%end%>
+		      </ul>
 
-<% @namespace.state_codes.each_with_index do |item, index|%>
-	<%if index == 0%>
-			<div id="<%= item.code_num%>" class="col s12" style="<%= @actived_num == 0 ? 'display: block' : (item.actived ? 'display: block'  : 'display: none')%>">
-		    	<%= form_for(item, :url => update_code_res_json_namespace_state_code_path(@namespace, item), html: {id: "sc#{item.id}", class: 'code_res_form'}) do |f| %>
-					  <div class="row">
-						  <div class="input-field col s12">
-						  <i class="material-icons prefix">mode_edit</i>
-					    <%= f.label '返回JSON' %><br>
-					    <%= f.text_area :code_res_json, class: 'materialize-textarea'%>
-					    </div>
-					  </div>
-					<% end %>
-		  </div>
-	<%else%>
-			<div id="<%= item.code_num%>" class="col s12" style="<%= @actived_num == 0 ? 'display: none' : (item.actived ? 'display: block'  : 'display: none')%>">
-		    	<%= form_for(item, :url => update_code_res_json_namespace_state_code_path(@namespace, item), html: {id: "sc#{item.id}", class: 'code_res_form'}) do |f| %>
-		    		<div class="row">
-						  <div class="input-field col s12">
-						  	<i class="material-icons prefix">mode_edit</i>
-						    <%= f.label '返回JSON' %><br>
-						    <%= f.text_area :code_res_json, class: 'materialize-textarea', id: "#{item.id}_textarea" %>
-						  </div>
-					  </div>
-					<% end %>
-		  </div>
-	<%end%>
-	
-<%end%>
-<%= hidden_field_tag 'ns_id', @namespace.id%>
+		<% @namespace.state_codes.each_with_index do |item, index|%>
+			<%if index == 0%>
+					<div id="<%= item.code_num%>" class="col s12" style="<%= @actived_num == 0 ? 'display: block' : (item.actived ? 'display: block'  : 'display: none')%>">
+				    	<%= form_for(item, :url => update_code_res_json_namespace_state_code_path(@namespace, item), html: {id: "sc#{item.id}", class: 'code_res_form'}) do |f| %>
+							  <div class="row">
+								  <div class="input-field col s12">
+								  <i class="material-icons prefix">mode_edit</i>
+								  <div class="col s1 push-s10">
+								  		<i data-target="remove-modal" class="material-icons prefix remove-state" id="remove_state_<%= item.id%>">mode_delete</i>	
+								  	</div>
+							    <%= f.label '返回JSON' %><br>
+							    <%= f.text_area :code_res_json, class: 'materialize-textarea'%>
+							    <i class="material-icons prefix active">mode_edit</i>
+							    </div>
+							  </div>
+							<% end %>
+				  </div>
+			<%else%>
+					<div id="<%= item.code_num%>" class="col s12" style="<%= @actived_num == 0 ? 'display: none' : (item.actived ? 'display: block'  : 'display: none')%>">
+				    	<%= form_for(item, :url => update_code_res_json_namespace_state_code_path(@namespace, item), html: {id: "sc#{item.id}", class: 'code_res_form'}) do |f| %>
+				    		<div class="row">
+								  <div class="input-field col s12">
+								  	<i class="material-icons prefix">mode_edit</i>
+								  	<div class="col s1 push-s10">
+								  		<i data-target="remove-modal" class="material-icons prefix remove-state" id="remove_state_<%= item.id%>">mode_delete</i>	
+								  	</div>
+								    <%= f.label '返回JSON' %><br>
+								    <%= f.text_area :code_res_json, class: 'materialize-textarea', id: "#{item.id}_textarea" %>
+
+								  </div>
+							  </div>
+							<% end %>
+				  </div>
+			<%end%>
+			
+		<%end%>
+		<%= hidden_field_tag 'ns_id', @namespace.id%>
 
 
-<div class="row">
-	<div class="col s12 center">
-		<a class="waves-effect waves-light btn" id="select_code_num">选择当前状态</a>
-	</div>
+		<div class="center">
+				
+				<a class="waves-effect waves-light btn red" id="select_code_num">选择当前状态</a> 或
+				<a class="waves-effect waves-dark btn" href="/namespaces">返回列表</a>
+		</div>
+		<!--content-->
+
+		<!-- Modal Structure -->
+	  <div id="remove-modal" class="modal">
+	    <div class="modal-content">
+	      <h4 class='center'>提示</h4>
+	      <p class="center">确定删除此状态?</p>
+	    </div>
+	    <div class="modal-footer">
+	      <a href="#!" class="modal-action modal-close waves-effect waves-red btn agree">确定</a>
+	      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn dismiss">取消</a>
+	    </div>
+	  </div>
+
+  </div>
 </div>
 
 
@@ -76,7 +92,7 @@
 				}, 100);
 			})
 			
-
+			//选择状态码
 			$('#select_code_num').on('click', function(){
 				var state_code_id = $('.tabs li a.active').attr('id');
 				$.ajax({
@@ -96,5 +112,46 @@
           }
 				})
 			});
+
+      //删除状态码
+			$('.remove-state').on('click', function() {
+				var selectedId = $(this).attr('id').split('_')[2],
+				    contentDom =  $($(this).attr('href'));
+
+				$('#remove-modal').openModal({
+			      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+			      opacity: .5, // Opacity of modal background
+			      in_duration: 300, // Transition in duration
+			      out_duration: 200, // Transition out duration
+			      ready: function() {
+			      	$('.modal-action').off('click').on('click', function () {
+			      		if($(this).hasClass('agree')) {
+			      			$.ajax({
+										type: 'DELETE',
+										url: '/namespaces/'+$('#ns_id').val()+'/state_codes/'+selectedId,
+										dataType: 'json',
+										success: function(data, status, xhr){
+					            if(data.success) {
+					            	$('a#'+selectedId).parent().remove();
+					            	contentDom.remove();
+					            	$('#tabs li:first-child').trigger('click');
+					            	$('#remove-modal').closeModal();
+					            }else{
+					            	Materialize.toast('删除失败', 5000);
+					            }
+					          },
+					          error: function(xhr, status, errorThrown){      
+					            Materialize.toast('系统异常', 5000);
+					          }
+									})
+			      		}else{
+			      			$('#remove-modal').closeModal();
+			      		}
+			      	})
+			      }, // Callback for Modal open
+			    }
+			  );
+			});
+
 		});
 </script>

@@ -1,5 +1,7 @@
-<h3 class='center'>添加状态码</h3>
-<%= link_to namespaces_path,  class: "waves-effect waves-light btn" do%>
-  <span class="link-txt">返回列表</span> 
-<%end%>
-<%= render 'form' %>
+<div class="row">
+  <div class="col s12 m6 offset-m3 l4 offset-l4">
+  	<h4 class='center'>添加Mock接口</h4>
+		<%= render :partial => 'form', locals: {btn_txt: '添加'} %>
+  </div>
+</div>
+

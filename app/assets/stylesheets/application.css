@@ -26,6 +26,33 @@
   margin-right: 10px;
 }
 
+.state-count {
+  background: #2196F3 !important;
+  color: #FFFFFF;
+  padding: 0 6px;
+  min-width: 3rem;
+  text-align: center;
+  line-height: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.remove-state:hover {
+  cursor: pointer;
+  color: #ee6e73;
+}
+
+.modal-footer a {
+  margin: auto 20px !important;
+  display: inline-block;
+}
+
+
+
+
+
+
 #left_bar, #content {
   padding: 0 !important;
 }
